@@ -5,8 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ArmCommand;
+import frc.robot.commands.GrabberCommand;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.RomiDrivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,8 +21,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final RomiDrivetrain m_romiDrivetrain = new RomiDrivetrain();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_romiDrivetrain);
 
   private final Grabber m_grabber = new Grabber();
 
@@ -43,9 +41,23 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_romiDrivetrain.arcadeDrive(controller.getLeftX(), controller.getLeftY());
+    //
+    JoystickButton xButton = new JoystickButton(controller, 3);
+    JoystickButton yButton = new JoystickButton(controller, 4);
+    JoystickButton aButton = new JoystickButton(controller, 5);
+    JoystickButton bButton = new JoystickButton(controller, 6);
+ 
+    xButton.whenPressed(new ArmCommand(m_grabber, 1.0));
+    xButton.whenReleased(new ArmCommand(m_grabber,0.0));
+  
+    yButton.whenPressed(new ArmCommand(m_grabber,-1.0));
+    yButton.whenReleased(new ArmCommand(m_grabber, 0.0));
+   
+    aButton.whenPressed(new GrabberCommand(m_grabber, 1.0));
+    aButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
 
-    //Button xButton = new Button();
-    
+    bButton.whenPressed(new GrabberCommand(m_grabber, -1.0));
+    bButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
   }
 
   /**
@@ -55,6 +67,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    //it's null atm bc I feel like it
+    return null;
   }
 }
