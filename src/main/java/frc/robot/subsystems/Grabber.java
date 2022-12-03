@@ -2,13 +2,14 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
+
 
 
 public class Grabber extends SubsystemBase{
     //incorrect spark channels
-    private Spark baseMotor = new Spark(2);
-    private Spark grabberMotor = new Spark(3);
+    private PWMVictorSPX baseMotor = new PWMVictorSPX(2);
+    private PWMVictorSPX grabberMotor = new PWMVictorSPX(3);
     //incorrect encoder channels, figure out later
     private Encoder baseEncoder = new Encoder(0,1);
     private Encoder grabberEncoder = new Encoder(2,3);
@@ -36,7 +37,7 @@ public class Grabber extends SubsystemBase{
     }
  
     public void baseMotorOn(double speed){
-        baseAngle = getBaseAngle();
+        baseAngle = this.getBaseAngle();
         if(baseAngle<maxBaseAngle && speed > 0){
             baseMotor.set(speed);
         }
@@ -50,7 +51,7 @@ public class Grabber extends SubsystemBase{
     }
  
     public void grabberMotorOn(double speed){
-        grabberAngle = getGrabberAngle();
+        grabberAngle = this.getGrabberAngle();
         if(grabberAngle<maxGrabberAngle && speed > 0){
             grabberMotor.set(speed);
         }

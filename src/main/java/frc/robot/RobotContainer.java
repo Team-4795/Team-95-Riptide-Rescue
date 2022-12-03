@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArmCommand;
 import frc.robot.commands.GrabberCommand;
 import frc.robot.subsystems.Grabber;
@@ -40,12 +41,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    m_romiDrivetrain.arcadeDrive(controller.getLeftX(), controller.getLeftY());
-    //
-    JoystickButton xButton = new JoystickButton(controller, 3);
-    JoystickButton yButton = new JoystickButton(controller, 4);
-    JoystickButton aButton = new JoystickButton(controller, 5);
-    JoystickButton bButton = new JoystickButton(controller, 6);
+    m_romiDrivetrain.setDefaultCommand(getArcadeDriveCommand());
+    
+    JoystickButton xButton = new JoystickButton(controller, XboxController.Button.kX.value);
+    JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
+    JoystickButton aButton = new JoystickButton(controller, XboxController.Button.kA.value);
+    JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
  
     xButton.whenPressed(new ArmCommand(m_grabber, 1.0));
     xButton.whenReleased(new ArmCommand(m_grabber,0.0));
@@ -60,12 +61,17 @@ public class RobotContainer {
     bButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
   }
 
+  private Command getArcadeDriveCommand() {
+    return new ArcadeDrive(
+      m_romiDrivetrain, () -> -controller.getRawAxis(1), () -> controller.getRawAxis(4));
+  }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomousCommand(){
     // An ExampleCommand will run in autonomous
     //it's null atm bc I feel like it
     return null;
