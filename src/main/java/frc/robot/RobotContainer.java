@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArmCommand;
 import frc.robot.commands.GrabberCommand;
@@ -43,21 +44,23 @@ public class RobotContainer {
   private void configureButtonBindings() {
     m_romiDrivetrain.setDefaultCommand(getArcadeDriveCommand());
     
+    
+
     JoystickButton xButton = new JoystickButton(controller, XboxController.Button.kX.value);
     JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
     JoystickButton aButton = new JoystickButton(controller, XboxController.Button.kA.value);
     JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
  
-    xButton.whenPressed(new ArmCommand(m_grabber, 1.0));
+    xButton.whenPressed(new ArmCommand(m_grabber, 0.2));
     xButton.whenReleased(new ArmCommand(m_grabber,0.0));
   
-    yButton.whenPressed(new ArmCommand(m_grabber,-1.0));
+    yButton.whenPressed(new ArmCommand(m_grabber,-0.2));
     yButton.whenReleased(new ArmCommand(m_grabber, 0.0));
    
-    aButton.whenPressed(new GrabberCommand(m_grabber, 1.0));
+    aButton.whenPressed(new GrabberCommand(m_grabber, 0.2));
     aButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
 
-    bButton.whenPressed(new GrabberCommand(m_grabber, -1.0));
+    bButton.whenPressed(new GrabberCommand(m_grabber, -0.2));
     bButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
   }
 

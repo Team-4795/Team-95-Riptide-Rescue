@@ -15,13 +15,13 @@ public class RomiDrivetrain extends SubsystemBase {
 
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
-  private final PWMVictorSPX m_leftMotor = new PWMVictorSPX(0);
-  private final PWMVictorSPX m_rightMotor = new PWMVictorSPX(1);
+  private final PWMVictorSPX m_leftMotor = new PWMVictorSPX(2);
+  private final PWMVictorSPX m_rightMotor = new PWMVictorSPX(4);
 
   // The Romi has onboard encoders that are hardcoded
   // to use DIO pins 4/5 and 6/7 for the left and right
-  private final Encoder m_leftEncoder = new Encoder(4, 5);
-  private final Encoder m_rightEncoder = new Encoder(6, 7);
+  private final Encoder m_leftEncoder = new Encoder(0, 1);
+  private final Encoder m_rightEncoder = new Encoder(2, 3);
 
   // Set up the differential drive controller
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
@@ -34,7 +34,7 @@ public class RomiDrivetrain extends SubsystemBase {
     resetEncoders();
 
     // Invert right side since motor is flipped
-    m_rightMotor.setInverted(true);
+    m_leftMotor.setInverted(true);
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
