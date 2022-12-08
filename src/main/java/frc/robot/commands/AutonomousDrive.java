@@ -3,15 +3,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.RomiDrivetrain;
+import frc.robot.subsystems.Grabber;
 
 
 public class AutonomousDrive extends SequentialCommandGroup{
 
-    public AutonomousDrive(RomiDrivetrain drivetrain){
-        addCommands(
-            new Drive(1.0, 2.0, drivetrain)
-            new Turntime(1, 2, drivetrain)
-        );  
+    public AutonomousDrive(RomiDrivetrain drivetrain, Grabber grabber){
+        addCommands(new Drive(1, 1, drivetrain));
+        addCommands(new Turntime(1,1,drivetrain));
+        addCommands(new Drive(1,1,drivetrain));
+        addCommands(new Turntime(1,1,drivetrain));
+        addCommands(new ArmTimed(grabber, 1, 1));
+        addCommands(new GrabberTimed(grabber, 1, 1));
     }
 
 
