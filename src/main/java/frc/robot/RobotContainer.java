@@ -57,15 +57,15 @@ public class RobotContainer {
     yButton.whenReleased(new ArmCommand(m_grabber, 0.0));
    
     aButton.whenPressed(new GrabberCommand(m_grabber, 0.5));
-    aButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
+    aButton.whenReleased(new GrabberCommand(m_grabber, 0));
 
     bButton.whenPressed(new GrabberCommand(m_grabber, -0.5));
-    bButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
+    bButton.whenReleased(new GrabberCommand(m_grabber, -0.4));
   }
 
   private Command getArcadeDriveCommand() {
     return new ArcadeDrive(
-      m_romiDrivetrain, () -> -controller.getRawAxis(4), () -> controller.getRawAxis(1));
+      m_romiDrivetrain, () -> controller.getRawAxis(4), () -> -controller.getRawAxis(1));
   }
 
   /**
