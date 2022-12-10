@@ -4,8 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.ArmCommand;
 import frc.robot.commands.GrabberCommand;
@@ -26,7 +27,7 @@ public class RobotContainer {
 
   private final Grabber m_grabber = new Grabber();
 
-  final XboxController controller = new XboxController(0);
+  final Joystick controller = new Joystick(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -43,24 +44,22 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_romiDrivetrain.setDefaultCommand(getArcadeDriveCommand());
-    
-    
 
-    JoystickButton xButton = new JoystickButton(controller, XboxController.Button.kX.value);
-    JoystickButton yButton = new JoystickButton(controller, XboxController.Button.kY.value);
-    JoystickButton aButton = new JoystickButton(controller, XboxController.Button.kA.value);
-    JoystickButton bButton = new JoystickButton(controller, XboxController.Button.kB.value);
+    JoystickButton xButton = new JoystickButton(controller, 0);
+    JoystickButton yButton = new JoystickButton(controller, 1);
+    JoystickButton aButton = new JoystickButton(controller, 2);
+    JoystickButton bButton = new JoystickButton(controller, 3);
  
-    xButton.whenPressed(new ArmCommand(m_grabber, 0.2));
+    xButton.whenPressed(new ArmCommand(m_grabber, 0.5));
     xButton.whenReleased(new ArmCommand(m_grabber,0.0));
   
-    yButton.whenPressed(new ArmCommand(m_grabber,-0.2));
+    yButton.whenPressed(new ArmCommand(m_grabber,-0.5));
     yButton.whenReleased(new ArmCommand(m_grabber, 0.0));
    
-    aButton.whenPressed(new GrabberCommand(m_grabber, 0.2));
+    aButton.whenPressed(new GrabberCommand(m_grabber, 0.5));
     aButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
 
-    bButton.whenPressed(new GrabberCommand(m_grabber, -0.2));
+    bButton.whenPressed(new GrabberCommand(m_grabber, -0.5));
     bButton.whenReleased(new GrabberCommand(m_grabber, 0.0));
   }
 
