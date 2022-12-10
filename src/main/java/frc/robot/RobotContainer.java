@@ -45,15 +45,15 @@ public class RobotContainer {
   private void configureButtonBindings() {
     m_romiDrivetrain.setDefaultCommand(getArcadeDriveCommand());
 
-    JoystickButton xButton = new JoystickButton(controller, 0);
-    JoystickButton yButton = new JoystickButton(controller, 1);
-    JoystickButton aButton = new JoystickButton(controller, 2);
-    JoystickButton bButton = new JoystickButton(controller, 3);
+    JoystickButton xButton = new JoystickButton(controller, 3);
+    JoystickButton yButton = new JoystickButton(controller, 4);
+    JoystickButton aButton = new JoystickButton(controller, 1);
+    JoystickButton bButton = new JoystickButton(controller, 2);
  
-    xButton.whenPressed(new ArmCommand(m_grabber, 0.5));
+    xButton.whenPressed(new ArmCommand(m_grabber, 0.3));
     xButton.whenReleased(new ArmCommand(m_grabber,0.0));
   
-    yButton.whenPressed(new ArmCommand(m_grabber,-0.5));
+    yButton.whenPressed(new ArmCommand(m_grabber,-0.3));
     yButton.whenReleased(new ArmCommand(m_grabber, 0.0));
    
     aButton.whenPressed(new GrabberCommand(m_grabber, 0.5));
@@ -65,7 +65,7 @@ public class RobotContainer {
 
   private Command getArcadeDriveCommand() {
     return new ArcadeDrive(
-      m_romiDrivetrain, () -> -controller.getRawAxis(1), () -> controller.getRawAxis(4));
+      m_romiDrivetrain, () -> -controller.getRawAxis(4), () -> controller.getRawAxis(1));
   }
 
   /**
