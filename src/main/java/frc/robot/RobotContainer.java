@@ -65,7 +65,7 @@ public class RobotContainer {
 
   private Command getArcadeDriveCommand() {
     return new ArcadeDrive(
-      m_romiDrivetrain, () -> controller.getRawAxis(4), () -> controller.getRawAxis(1));
+      m_romiDrivetrain, () -> 0.25, () -> controller.getRawAxis(1));
   }
 
   /**
